@@ -1,0 +1,7 @@
+
+
+#cross compile
+source ~/100ask_stm32mp157_pro-sdk/cross_env.sh
+
+eg:
+arm-buildroot-linux-gnueabihf-gcc helloworld.c -o helloworld
