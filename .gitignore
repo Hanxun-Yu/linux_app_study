@@ -6,4 +6,6 @@
 !*/
 !.gitignore
 !*.md
+!Makefile
+!clean
 .vscode

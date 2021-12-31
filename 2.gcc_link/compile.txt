@@ -23,3 +23,4 @@ gcc -shared -o libtest.so main.o sub.o
 gcc -o test -ltest -L.    #-ltest链接动态库  -L.指定libtest.so所在路径为当前目录
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./  #运行时，添加当前目录到so搜索路径列表
 
+
