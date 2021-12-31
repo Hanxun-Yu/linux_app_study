@@ -1,0 +1,25 @@
+#链接报错说foo未定义
+#main中使用了sub.h内声明的foo,定义在sub.c
+gcc main.c -o test
+
+#编译时带上sub.c，解决
+gcc main.c sub.c -o test
+
+#但是在大型项目中，不可能每次编译所有.c,效率太低，因为可能只有少数.c文件被修改
+#所以单独编译各自的.o，最后进行链接
+gcc -c main.c -o main.o
+gcc -c sub.c -o sub.o
+gcc main.o -o test # 报错 foo未定义
+gcc main.o sub.o -o test #带上sub.o 解决
+
+
+#把若干.o文件压缩成静态库
+ar crs libtest.a main.o sub.o
+gcc -o test libtest.a
+
+
+#把若干.o生成动态库
+gcc -shared -o libtest.so main.o sub.o
+gcc -o test -ltest -L.    #-ltest链接动态库  -L.指定libtest.so所在路径为当前目录
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./  #运行时，添加当前目录到so搜索路径列表
+

@@ -1,0 +1,21 @@
+#预处理
+gcc -E helloworld.c -o helloworld.i
+
+#汇编
+gcc -S helloworld.i -o helloworld.s
+
+#汇编编译(生成二进制，未链接)
+gcc -c helloworld.s -o helloworld.o
+
+#链接(可执行)
+gcc helloworld.o -o helloworld
+
+#合并以上
+gcc helloworld.c -o helloworld
+
+#查看编译过程(头文件搜索路径)
+gcc ... -v 
+
+#添加头文件搜索路径(-I)
+gcc helloworld.c -o helloworld -I.
+ 
