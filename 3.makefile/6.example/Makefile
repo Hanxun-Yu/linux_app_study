@@ -7,6 +7,11 @@ objs = main.o
 dep_files := $(patsubst %,.%.d,$(objs)) #依赖文件名为 a.o -> .a.o.d
 dep_files := $(wildcard $(dep_files)) #过滤出真实存在的文件
 
+#使用cflag
+CFLAGS = -Werror # 把所有警告当成错误
+CFLAGS += -Iinclude # 指定头文件搜索路径
+
+
 test: $(objs)
 	gcc -o test $^ 
 
@@ -16,7 +21,7 @@ include $(dep_files) #include包含别的makefile，这里即依赖文件
 endif
 
 %.o : %.c
-	gcc -c -o $@ $< -MD -MF .$@.d  #-MD表示输出依赖makefile文件xxx.dep  -MF .$@.d表示把xxx.dep 改名为.$@.d
+	gcc $(CFLAGS) -c -o $@ $< -MD -MF .$@.d  #-MD表示输出依赖makefile文件xxx.dep  -MF .$@.d表示把xxx.dep 改名为.$@.d
 
 clean:
 	rm *.o
