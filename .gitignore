@@ -1,8 +1,11 @@
 *
 !*.c
+!*.h
 !*.cpp
 !*.txt
 !*/
 !.gitignore
 !*.md
+!Makefile
+!clean
 .vscode
