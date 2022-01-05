@@ -20,6 +20,6 @@ gcc制作与使用.so与.a
     6. 解决头文件变化
     7. 宏与通用makefile  
   
-4. fileio
+4. fileio  
 文件类型、读写、内核接口
 
