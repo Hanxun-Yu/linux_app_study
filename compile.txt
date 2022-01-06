@@ -5,3 +5,7 @@ source ~/100ask_stm32mp157_pro-sdk/cross_env.sh
 
 eg:
 arm-buildroot-linux-gnueabihf-gcc helloworld.c -o helloworld
+
+#board mount ubuntu
+mount -t nfs -o nolock,vers=3 10.1.2.128:/home/book/nfs_rootfs /mnt
+
