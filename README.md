@@ -21,5 +21,10 @@ gcc制作与使用.so与.a
     7. 宏与通用makefile  
   
 4. fileio  
-文件类型、读写、内核接口
+文件类型、读写、open、close内核接口
 
+5. framebuffer  
+基于framebuffer控制lcd屏幕
+
+6. char_lcd_show  
+字符编码、点阵显示字符
