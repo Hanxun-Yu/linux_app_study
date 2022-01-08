@@ -27,4 +27,7 @@ gcc制作与使用.so与.a
 基于framebuffer控制lcd屏幕
 
 6. char_lcd_show  
-字符编码、点阵显示字符
+字符编码、点阵显示字符、代码文件编码、可执行文件编码  
+
+7. crosscompile_freetype  
+交叉编译常见错误、编译freetype

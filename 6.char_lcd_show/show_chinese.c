@@ -4716,8 +4716,12 @@ void lcd_put_ascii(int x, int y, unsigned char c) {
  * 2020/05/12	     V1.0	  zh(angenao)	      创建
  ***********************************************************************/
 void lcd_put_chinese(int x, int y, unsigned char* str) {
+    //gb2312 2个字节表示1个汉字，1个字节表示区号，1个字节表示位号
+    //区号 （0xA1是为了兼容ASCII码的偏移量）
     unsigned int area = str[0] - 0xA1;
+    //位号
     unsigned int where = str[1] - 0xA1;
+    //编码文件定位到该汉字的点阵信息（hzkmem是main中初始化的编码文件内存映射）
     unsigned char* dots = hzkmem + (area * 94 + where) * 32;
     unsigned char byte;
 
