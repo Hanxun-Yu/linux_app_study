@@ -26,3 +26,14 @@ export LD_LIBRARY_PATH=\<path>:$LD_LIBRARY_PATH
 这里cp -rfd中的d参数表示复制时保留链接状态
 
 #### freetype矢量字体
+矢量字体解决了直接使用点阵显示放大缩小不方便以及锯齿模糊等问题
+![](https://picbed-xunxun.oss-cn-shanghai.aliyuncs.com/20220108223645.png)
+
+字体文件内有charmaps，可支持多种字符集，通过字符的编码找到该字符的轮廓信息  
+把轮廓信息转换为点阵信息，就可以显示到lcd上了  
+这些操作freetype都提供了接口
+![](https://picbed-xunxun.oss-cn-shanghai.aliyuncs.com/20220108223928.png)
+
+#### 使用wchar_t
+使用wchar_t，宽字符，使代码内声明的字符串以utf-8编码
+每个wchar_t占据4字节，可执行程序里wchar_t中保存的就是字符的UNICODE值。

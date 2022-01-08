@@ -1,0 +1,11 @@
+#freetype_show_font.c
+arm-buildroot-linux-gnueabihf-gcc -o freetype_show_font freetype_show_font.c  -lfreetype
+
+#run
+./freetype_show_font ./simsun.ttc 200
+
+#freetype_show_font_angle.c
+arm-buildroot-linux-gnueabihf-gcc -o freetype_show_font_angle freetype_show_font_angle.c  -lfreetype -lm 
+
+#run
+./freetype_show_font_angle ./simsun.ttc 90 200
