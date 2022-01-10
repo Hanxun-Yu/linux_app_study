@@ -10,4 +10,5 @@
 !Makefile.build
 !clean
 !HZK16
+!*.ttc
 .vscode
