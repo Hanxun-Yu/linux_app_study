@@ -1,11 +1,11 @@
 #include <fcntl.h>
 #include <linux/input.h>
+#include <stdio.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <stdio.h>
 
-const char* (EVENT_TYPE[]) = {
+const char*(EVENT_TYPE[]) = {
     "EV_SYN", "EV_KEY", "EV_REL", "EV_ABS", "EV_MSC", "EV_SW", "NULL",  "NULL",
     "NULL",   "NULL",   "NULL",   "NULL",   "NULL",   "NULL",  "NULL",  "NULL",
     "NULL",   "EV_LED", "EV_SND", "NULL",   "EV_REP", "EV_FF", "EV_PWR"};
@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
             byte = ((unsigned char*)evbit)[i];
 
             for (int bit = 0; bit < 8; bit++) {
-                if( byte & (1 << bit)) {
-                    printf("%s\n",EVENT_TYPE[i*8+bit]);
+                if (byte & (1 << bit)) {
+                    printf("%s\n", EVENT_TYPE[i * 8 + bit]);
                 }
             }
         }
