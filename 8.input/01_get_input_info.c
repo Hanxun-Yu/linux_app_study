@@ -58,6 +58,7 @@ int main(int argc, char** argv) {
             byte = ((unsigned char*)evbit)[i];
 
             for (int bit = 0; bit < 8; bit++) {
+                //看byte中是1的位有哪些
                 if (byte & (1 << bit)) {
                     printf("%s\n", EVENT_TYPE[i * 8 + bit]);
                 }

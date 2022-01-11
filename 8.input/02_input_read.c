@@ -4,6 +4,8 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <string.h>
+#include <unistd.h>
 
 const char*(EVENT_TYPE[]) = {
     "EV_SYN", "EV_KEY", "EV_REL", "EV_ABS", "EV_MSC", "EV_SW", "NULL",  "NULL",
@@ -12,7 +14,11 @@ const char*(EVENT_TYPE[]) = {
 
 /**
  * @brief
- *  /dev/input/event0
+ *  #compile
+ *   gcc 02_input_read.c -o 02_input_read
+ *
+ *   #run  加上noblock参数，将会异步获取设备输入
+ *   sudo ./02_input_read /dev/input/event1 noblock
  * @param argc
  * @param argv
  * @return int
@@ -24,12 +30,18 @@ int main(int argc, char** argv) {
     struct input_id id;
     unsigned int evbit[2];
 
-    if (argc != 2) {
-        printf("Usage:%s <dev>\n", argv[0]);
+    if (argc < 2) {
+        printf("Usage:%s <dev> [noblock]\n", argv[0]);
         return -1;
     }
 
-    fd = open(argv[1], O_RDONLY);
+    // strcmp(strA,strB),若strA==strB则返回0
+    if (argc == 3 && !strcmp(argv[2], "noblock")) {
+        fd = open(argv[1], O_RDONLY | O_NONBLOCK);
+
+    } else {
+        fd = open(argv[1], O_RDONLY);
+    }
     if (fd < 0) {
         printf("open error:%s\n", argv[1]);
         return -1;
@@ -65,10 +77,19 @@ int main(int argc, char** argv) {
         }
     }
 
+    struct input_event event;
+    while(1) {
+        //不加noblock，下面read将阻塞进程将休眠，直到有输入 （休眠唤醒机制）
+        //加上noblock参数，下面将立即返回 （轮询方式）
+        len = read(fd,&event,sizeof(event));
+        if(len == sizeof(event)) {
+            printf("read event type=0x%x, code=0x%x, value=0x%x\n",event.type,event.code,event.value);
+        } else {
+            printf("read error\n");
+        }
+    }
+
+    close(fd);
+
     return 0;
 }
-
-// compile
-// gcc 01_get_input_info.c -o 01_get_input_info
-// run
-//./01_get_input_info /dev/input/event0
