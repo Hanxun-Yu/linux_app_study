@@ -31,3 +31,9 @@ gcc制作与使用.so与.a
 
 7. crosscompile_freetype  
 交叉编译常见错误、编译freetype
+
+8. input
+    1. ioctl获取设备信息
+    2. 读取输入设备的输入
+
+
