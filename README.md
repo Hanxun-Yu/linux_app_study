@@ -38,4 +38,10 @@ gcc制作与使用.so与.a
     3. 读取输入设备的输入 poll方式
     4. 读取输入设备的输入 异步信号方式
 
+9. tcp_udp
+简单实现 tcp/udp server client
+
+10. thread
+线程创建、互斥、同步
+
 
