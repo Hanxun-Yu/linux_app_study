@@ -11,4 +11,6 @@
 !clean
 !HZK16
 !*.ttc
+!*.png
+!*.pdf
 .vscode
