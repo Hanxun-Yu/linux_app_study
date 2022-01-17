@@ -30,3 +30,4 @@ https://www.bilibili.com/video/BV1kk4y117Tu?p=36&spm_id_from=pageDriver
 
 
 #### pc与arm串口命令行通讯过程
+![](https://picbed-xunxun.oss-cn-shanghai.aliyuncs.com/20220115162920.png)
