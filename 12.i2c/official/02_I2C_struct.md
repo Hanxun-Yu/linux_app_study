@@ -106,6 +106,7 @@
 使用一句话概括I2C传输：
 
 * APP通过I2C Controller与I2C Device传输数据
+  * 使用i2c_dev.c 调用 i2c_adapter 来控制 I2C Controller 这个设备，从而通过它与从设备通讯
 
 * APP通过i2c_adapter与i2c_client传输i2c_msg
 
