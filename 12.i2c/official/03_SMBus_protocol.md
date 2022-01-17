@@ -10,7 +10,7 @@
 * `SMBus_3_0_20141220.pdf`
 * I2CTools: `https://mirrors.edge.kernel.org/pub/software/utils/i2c-tools/`
 
-### 1. SMBus是I2C协议的一个子集
+### 1. SMBus是I2C协议的一个子集（SMBus比I2C更严格）
 
 SMBus: System Management Bus，系统管理总线。
 SMBus最初的目的是为智能电池、充电电池、其他微控制器之间的通信链路而定义的。
@@ -48,7 +48,9 @@ SMBus有哪些更严格的要求？跟一般的I2C协议有哪些差别？
   * 比如读EEPROM时，涉及2个操作：
     * 把存储地址发给设备
     * 读数据
-  * 在写、读之间，可以不发出P信号，而是直接发出S信号：这个S信号就是`REPEATED START`
+  * 在写、读之间，可以不发出P信号
+    * i2c协议中每个请求头部都是s，尾部都是p,(eg. s...p s...p)(p不能省略)
+    * 而在smbus中p可以省略，只需把后面紧接的s改成sr(eg s...sr...p),sr即`REPEATED START`
   * 如下图所示
     ![image-20210224100056055](pic/04_I2C/018_repeated_start.png)
 * SMBus Low Power Version 
@@ -141,7 +143,7 @@ I2C-tools中的函数：i2c_smbus_read_byte_data()。
 
 先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再读取一个字节的数据。
 上面介绍的`SMBus Receive Byte`是不发送Comand，直接读取数据。
-
+(当发生方向变化时 wr变成了rd，需重新start)
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_READ_BYTE_DATA
 ```
@@ -156,6 +158,7 @@ I2C-tools中的函数：i2c_smbus_read_word_data()。
 
 先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再读取2个字节的数据。
 
+
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_READ_WORD_DATA
 ```
@@ -169,7 +172,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_WORD_DATA
 I2C-tools中的函数：i2c_smbus_write_byte_data()。
 
 先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再发出1个字节的数据。
-
+(当未发生方向变化时 2条都是wr，无需重新start)
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_WRITE_BYTE_DATA
 ```
@@ -198,7 +201,7 @@ I2C-tools中的函数：i2c_smbus_read_block_data()。
 
 先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再发起度操作：
 
-* 先读到一个字节(Block Count)，表示后续要读的字节数
+* 先读到一个字节(Block Count=N)，表示后续要读的字节数
 * 然后读取全部数据
 
 ```shell
@@ -230,7 +233,7 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_BLOCK_DATA
 
 I2C-tools中的函数：i2c_smbus_read_i2c_block_data()。
 
-先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再发出1个字节的`Byte Conut`(表示后续要发出的数据字节数)，最后发出全部数据。
+先发出`Command Code`(它一般表示芯片内部的寄存器地址)，然后发出读请求，从设备将直接发出全部数据。
 
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_READ_I2C_BLOCK
@@ -247,7 +250,7 @@ Functionality flag: I2C_FUNC_SMBUS_READ_I2C_BLOCK
 
 I2C-tools中的函数：i2c_smbus_write_i2c_block_data()。
 
-先发出`Command Code`(它一般表示芯片内部的寄存器地址)，再发出1个字节的`Byte Conut`(表示后续要发出的数据字节数)，最后发出全部数据。
+先发出`Command Code`(它一般表示芯片内部的寄存器地址)，然后直接发出全部数据。
 
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_WRITE_I2C_BLOCK
@@ -257,7 +260,8 @@ Functionality flag: I2C_FUNC_SMBUS_WRITE_I2C_BLOCK
 
 #### 2.13 SMBus Block Write - Block Read Process Call
 
-![image-20210224112940865](pic/04_I2C/028_smbus_block_write_block_read_process_call.png)先写一块数据，再读一块数据。
+![image-20210224112940865](pic/04_I2C/028_smbus_block_write_block_read_process_call.png)先写一块数据，再读一块数据。  
+这里有一点没搞懂，再读一块，为什么不需要Command Code（读哪一块）
 
 ```shell
 Functionality flag: I2C_FUNC_SMBUS_BLOCK_PROC_CALL
