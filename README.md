@@ -1,8 +1,11 @@
-#### 跟着 <<韦东山嵌入式Linux教程>> 中第4篇linux应用开发基础  
+#### 跟着韦东山的linux应用开发基础视频   
 #### 重新复习一下 gcc makefile c/c++ socket thread 等  
 #### 以及使用一些通讯接口的使用 uart i2c EEPROM  
-视频:https://www.bilibili.com/video/BV1w4411B7a4  
-章节:(4_1-1 --- 4_11-6)
+视频:[https://www.bilibili.com/video/BV1w4411B7a4  ](https://www.bilibili.com/video/BV1kk4y117Tu)  
+
+开发板:stm32mp157
+
+---
 
 #### 目录
 1. helloworld_gcc  
@@ -38,16 +41,14 @@ gcc制作与使用.so与.a
     3. 读取输入设备的输入 poll方式
     4. 读取输入设备的输入 异步信号方式
 
-9. tcp_udp
+9. tcp_udp  
 简单实现 tcp/udp server client
 
-10. thread
+10. thread  
 线程创建、互斥、同步
 
-11. uart
+11. uart  
 串口协议、驱动、读写
 
-12. i2c
+12. i2c  
 i2c、smbus协议，i2c-tools库与使用
-
-
