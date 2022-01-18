@@ -14,7 +14,6 @@
 
 /* 
  * 使用i2ctools封装好的函数读写eeprom
- 
  * ./at24c02 <i2c_bus_number> w "100ask.taobao.com"
  * ./at24c02 <i2c_bus_number> r
  */
