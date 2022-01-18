@@ -51,4 +51,4 @@ gcc制作与使用.so与.a
 串口协议、驱动、读写
 
 12. i2c  
-i2c、smbus协议，i2c-tools库与使用
+i2c、smbus协议，i2c-tools库与使用,读写eeprom
