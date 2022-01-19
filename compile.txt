@@ -3,7 +3,7 @@
 #cross compile
 export ARCH=arm
 export CROSS_COMPILE=arm-buildroot-linux-gnueabihf-
-export PATH=$PATH:/home/book/100ask_stm32mp157_pro-sdk/ToolChain/\
+export PATH=$PATH:/home/${USER}/100ask_stm32mp157_pro-sdk/ToolChain/\
 arm-buildroot-linux-gnueabihf_sdk-buildroot/bin
 
 #可以把上面写入脚本
